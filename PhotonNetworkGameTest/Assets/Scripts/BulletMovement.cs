@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    public float MovementSpeed = 5.0f;
+    public float MovementSpeed = 8.0f;
     public float LifeSpan = 3.0f;
     public float bulletDamage = 25;
     public PlayerCharacter Owner;
@@ -41,24 +41,28 @@ public class BulletMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            Debug.Log("Collision happened");
-            if (collision.tag == "PlayerCharacter")//Destroys itself and spawns explosion and deals damage
+        if (collision.tag == "PlayerCharacter")//Destroys itself and spawns explosion and deals damage
+        {
+            hitPlayer = collision.gameObject.GetComponent<PlayerCharacter>();
+            if(hitPlayer != Owner)//if its not the owner of the bullet
             {
-                hitPlayer = collision.gameObject.GetComponent<PlayerCharacter>();
                 if (hitPlayer.GetControllable())
                 {
-                    hitPlayer.LowerHealth(bulletDamage);//lowers player health
+                    Owner.IncDamageDealt(bulletDamage);
+                    hitPlayer.LowerHealth(Owner, bulletDamage);//lowers player health
                     BlowUp();
                 }
             }
-            else if (collision.tag == "Environment")//Destroys itself and spawns explosion and deals damage
-            {
-                BlowUp();
-            }
+        }
+        else if (collision.tag == "Environment")//Destroys itself and spawns explosion and deals damage
+        {
+            BlowUp();
+        }
     }
 
     private void BlowUp()
     {
+        FindObjectOfType<AudioManager>().Play("MissileExplosion");
         Instantiate(ExplosionFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }

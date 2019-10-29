@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693208029337653075}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.017, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4411773083840156899}
@@ -132,10 +132,11 @@ GameObject:
   - component: {fileID: 2944983153805834704}
   - component: {fileID: -4600358654432210894}
   - component: {fileID: 8807350468140832144}
-  - component: {fileID: 8414131514370116780}
+  - component: {fileID: -3778649089455333853}
   - component: {fileID: -4025200024367056656}
   - component: {fileID: 5986903431377578900}
   - component: {fileID: 6857116766946567201}
+  - component: {fileID: 3074663766365760394}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: PlayerCharacter
@@ -171,13 +172,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
+  BoostSpeed: 3
   BulletPrefab: {fileID: 2379806502294823900, guid: 72f0c5262d3e72b4eb1b9c33e83d7f6a,
     type: 3}
   MouseTarget: {fileID: 1084237077904298, guid: 2338ca1beaeb54964b1c21a27138ae8c,
     type: 3}
-  bulletSpawnDistance: 1
-  PlayerHealth: 100
+  bulletSpawnDistance: 0
   ReloadTime: 1
+  kills: 0
+  deaths: 0
+  damageDealt: 0
 --- !u!114 &8807350468140832144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,12 +200,12 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8414131514370116780}
+  - {fileID: -3778649089455333853}
   - {fileID: -4600358654432210894}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8414131514370116780
+--- !u!114 &-3778649089455333853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,12 +214,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2944983153805834717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 1
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 2
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!61 &-4025200024367056656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -280,6 +302,14 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!81 &3074663766365760394
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2944983153805834717}
+  m_Enabled: 1
 --- !u!1 &4391204606259506422
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 4391204606259506422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.87, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7114744745452082257}
   m_RootOrder: 0

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69173756698599f4d91f500b243cf159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 10
+  MovementSpeed: 8
   LifeSpan: 3
   bulletDamage: 25
   Owner: {fileID: 0}

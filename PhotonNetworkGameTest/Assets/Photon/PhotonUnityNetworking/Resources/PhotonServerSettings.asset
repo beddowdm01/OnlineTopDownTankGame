@@ -40,5 +40,7 @@ MonoBehaviour:
   - KillPlayer
   - Respawn
   - RespawnPlayer
+  - KillPlayerSettings
+  - RespawnPlayerSettings
   DisableAutoOpenWizard: 1
   ShowSettings: 0
