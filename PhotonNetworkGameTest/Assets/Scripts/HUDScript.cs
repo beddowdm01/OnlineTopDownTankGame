@@ -8,13 +8,20 @@ public class HUDScript : MonoBehaviour
     private Text[] HUDTexts;
     private Text health;
     private Text boost;
+    private GameObject scoreBoard;
     private PlayerCharacter player;
+
+    private void Awake()
+    {
+
+        scoreBoard = GameObject.Find("ScoreBoard");//gets the scoreboard
+    }
 
     private void Start()
     {
-        HUDTexts = GetComponentsInChildren<Text>();
-        player = FindObjectOfType<PlayerCharacter>();
-        foreach(Text text in HUDTexts)
+        HUDTexts = GetComponentsInChildren<Text>();//Gets all the text objects in the game object
+        player = FindObjectOfType<PlayerCharacter>();//gets the player characters
+        foreach (Text text in HUDTexts)
         {
             if(text.name == "Health")
             {
@@ -27,10 +34,28 @@ public class HUDScript : MonoBehaviour
         }
     }
 
+    public void ActivateScoreBoard()
+    {
+        scoreBoard.SetActive(true);//Activates scoreboard
+    }
+
+    public void DeactivateScoreBoard()
+    {
+        scoreBoard.SetActive(false);//deactivates scoreboard
+    }
+
     // Update is called once per frame
     void Update()
     {
-        health.text = player.GetHealth().ToString() + "%";
-        boost.text = player.GetBoost().ToString() + "%";
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            ActivateScoreBoard();//Activates the scoreboard when tab is pressed
+        }
+        else
+        {
+            DeactivateScoreBoard();//Deactivates the scoreboard when tab is pressed
+        }
+        health.text = ((int)player.GetHealth()).ToString() + "%";//Displays tank health
+        boost.text = ((int)player.GetBoost()).ToString() + "%";//Displays tank boost
     }
 }

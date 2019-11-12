@@ -3,12 +3,14 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioManager
     - BulletMovement
+    - DelayStartLobby
+    - DelayStartRoom
+    - DelayStartWaitingRoom
     - GameSetupController
     - HUDScript
     - NetworkController
     - PlayerCharacter
-    - QuickStartLobby
-    - QuickStartRoom
+    - ScoreRow
     - SpawnPoint
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
@@ -20,8 +22,6 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
-    PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -31,6 +31,7 @@ ScriptsOnlyBuild:
     - Photon.Pun.ServerSettings
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -53,7 +54,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
-    Assets/Scenes/RoomScene.unity:
+    Assets/Scenes/DelayStartWaitingRoom.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -66,14 +67,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 50
-      Script: {instanceID: 0}
-    - Class: 61
+    - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 584}
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
@@ -81,24 +78,22 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11370}
     - Class: 114
-      Script: {instanceID: 11572}
-    - Class: 114
       Script: {instanceID: 11860}
     - Class: 114
-      Script: {instanceID: 12076}
+      Script: {instanceID: 12340}
     - Class: 114
-      Script: {instanceID: 12096}
+      Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 13288}
     - Class: 114
-      Script: {instanceID: 13364}
+      Script: {instanceID: 13370}
+    - Class: 114
+      Script: {instanceID: 20610}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
-      Script: {instanceID: 0}
-    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -108,15 +103,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    - Class: 19719996
-      Script: {instanceID: 0}
-    - Class: 156049354
-      Script: {instanceID: 0}
-    - Class: 483693784
-      Script: {instanceID: 0}
-    - Class: 1839735485
-      Script: {instanceID: 0}
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/MainMenuScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -176,49 +163,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11860}
     - Class: 114
-      Script: {instanceID: 11870}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 11936}
+      Script: {instanceID: 12112}
     - Class: 114
-      Script: {instanceID: 12042}
+      Script: {instanceID: 12126}
     - Class: 114
-      Script: {instanceID: 12138}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 12208}
+      Script: {instanceID: 12214}
     - Class: 114
-      Script: {instanceID: 12334}
+      Script: {instanceID: 12340}
     - Class: 114
-      Script: {instanceID: 12388}
+      Script: {instanceID: 12394}
     - Class: 114
-      Script: {instanceID: 12466}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12550}
+      Script: {instanceID: 12556}
     - Class: 114
-      Script: {instanceID: 12558}
+      Script: {instanceID: 12564}
     - Class: 114
-      Script: {instanceID: 12764}
-    - Class: 114
-      Script: {instanceID: 12772}
+      Script: {instanceID: 12770}
     - Class: 114
       Script: {instanceID: 12778}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12784}
     - Class: 114
-      Script: {instanceID: 13018}
+      Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 13154}
+      Script: {instanceID: 13024}
     - Class: 114
-      Script: {instanceID: 13282}
+      Script: {instanceID: 13160}
     - Class: 114
-      Script: {instanceID: 13364}
+      Script: {instanceID: 13288}
     - Class: 114
-      Script: {instanceID: 13396}
+      Script: {instanceID: 13370}
     - Class: 114
-      Script: {instanceID: 13404}
+      Script: {instanceID: 13402}
     - Class: 114
-      Script: {instanceID: 27172}
+      Script: {instanceID: 13410}
+    - Class: 114
+      Script: {instanceID: 19724}
+    - Class: 114
+      Script: {instanceID: 19732}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -248,6 +237,71 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 225
+      Script: {instanceID: 0}
+    Assets/Scenes/RoomScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 584}
+    - Class: 114
+      Script: {instanceID: 11114}
+    - Class: 114
+      Script: {instanceID: 11326}
+    - Class: 114
+      Script: {instanceID: 11370}
+    - Class: 114
+      Script: {instanceID: 11572}
+    - Class: 114
+      Script: {instanceID: 11860}
+    - Class: 114
+      Script: {instanceID: 12078}
+    - Class: 114
+      Script: {instanceID: 12098}
+    - Class: 114
+      Script: {instanceID: 12918}
+    - Class: 114
+      Script: {instanceID: 13370}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -828,6 +882,18 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: fa7f55887d665bc170ce7b61e2734a7f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioManager
+  - hash:
+      serializedVersion: 2
+      Hash: b244a198c32e71efa33907b76c9cfdef
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ScoreRow
+  - hash:
+      serializedVersion: 2
       Hash: 7602c8d40ade510f4c0e781c7062b246
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1332,7 +1398,7 @@ ScriptsOnlyBuild:
     className: OnEscapeQuit
   - hash:
       serializedVersion: 2
-      Hash: 7ccfbfb82ba710372d9850c0d8f78f78
+      Hash: e0dfa8c841e16e8b6f6694b9e247e721
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCharacter
@@ -1578,12 +1644,25 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: fa7f55887d665bc170ce7b61e2734a7f
+      Hash: 5099875986eb084fb31755404ffa277b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: AudioManager
+    className: DelayStartLobby
+  - hash:
+      serializedVersion: 2
+      Hash: fb116fea31008c73f5a08f768526c87e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DelayStartRoom
+  - hash:
+      serializedVersion: 2
+      Hash: dc047ccf8e6284b99f09c1a9e77b5bff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DelayStartWaitingRoom
   platform: 5
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/MainMenuScene.unity
+  - Assets/Scenes/DelayStartWaitingRoom.unity
   - Assets/Scenes/RoomScene.unity
   playerPath: C:/Users/beddo/Documents/Project Work/Unity Projects/PhotonNetworkGameTest/Build/PhotonNetworkGameTest.exe

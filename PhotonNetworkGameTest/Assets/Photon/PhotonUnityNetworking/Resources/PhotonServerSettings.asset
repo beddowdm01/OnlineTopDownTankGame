@@ -42,5 +42,8 @@ MonoBehaviour:
   - RespawnPlayer
   - KillPlayerSettings
   - RespawnPlayerSettings
+  - SetPlayer
+  - SetScoreBoard
+  - RPCSendTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 0

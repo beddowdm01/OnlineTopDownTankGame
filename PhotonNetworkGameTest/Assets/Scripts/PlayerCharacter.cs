@@ -26,11 +26,9 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     private float PlayerHealth = 100;
     private float PlayerBoost = 100;
     private AudioManager audioManager;
-    [SerializeField]
+    private ScoreRow playerScore;
     private int kills;
-    [SerializeField]
     private int deaths;
-    [SerializeField]
     private float damageDealt;
 
 
@@ -97,7 +95,6 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
                 photonView.RPC("Shoot", RpcTarget.All, bulletSpawnPos, gun.transform.rotation);//sends a message to all players to shoot
             }
             ReloadTime -= Time.unscaledDeltaTime;//Reload cooldown
-            Debug.Log("Deaths: " + deaths + "DamageDealt" + damageDealt + "Kills: " + kills);
         }
     }
 
@@ -109,7 +106,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         {
 
             transform.position += transform.up * Time.deltaTime * BoostSpeed * moveAxis;//boosts the tank forwards and backwards
-            audioManager.ChangeVolume("BoostEngine", 0.4f);
+            audioManager.ChangeVolume("BoostEngine", 0.15f);
             audioManager.ChangeVolume("MoveEngine", 0.0f);
             PlayerBoost -= 0.5f;
         }
@@ -119,7 +116,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
             if(PlayerBoost <= 100f)
             {
                 PlayerBoost += 0.1f;
-                audioManager.ChangeVolume("MoveEngine", 0.4f);
+                audioManager.ChangeVolume("MoveEngine", 0.15f);
                 audioManager.ChangeVolume("BoostEngine", 0.0f);
             }
         }
@@ -184,6 +181,14 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
 
+    public void SetScoreTarget(ScoreRow scoreBoard)
+    {
+        playerScore = scoreBoard;//sets this players scoreboard
+        int scoreID = scoreBoard.GetComponent<PhotonView>().ViewID;
+        photonView.RPC("SetScoreBoard", RpcTarget.AllBufferedViaServer, scoreID);//sends a message to all players to set scoreboard
+        playerScore.SetTargetPlayer(photonView.ViewID);//makes the scoreboards target this
+    }
+
     public bool GetControllable()
     {
         return controllable;
@@ -198,20 +203,37 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     {
         return PlayerBoost;
     }
+
+    public float GetDamage()
+    {
+        return damageDealt;
+    }
     
+    public float GetKills()
+    {
+        return kills;
+    }
+    
+    public float GetDeaths()
+    {
+        return deaths;
+    }
     public void IncDamageDealt(float damage)
     {
         damageDealt += damage;
+        playerScore.UpdateScore();
     }
 
     public void IncKills()
     {
         kills++;
+        playerScore.UpdateScore();
     }
 
     public void IncDeaths()
     {
         deaths++;
+        playerScore.UpdateScore();
     }
 
     [PunRPC]
@@ -222,6 +244,12 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         FindObjectOfType<AudioManager>().Play("TankShot");
         bullet = Instantiate(BulletPrefab, bulletSpawnPos, gunRotation) as GameObject;
         bullet.GetComponent<BulletMovement>().InitialiseBullet(this, Mathf.Abs(lag));
+    }
+
+    [PunRPC]
+    private void SetScoreBoard(int ScoreID, PhotonMessageInfo info)//Assigns a score row to this player
+    {
+        playerScore = (PhotonView.Find(ScoreID).gameObject).GetComponent<ScoreRow>();
     }
 
     [PunRPC]

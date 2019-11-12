@@ -28,6 +28,10 @@ public class GameSetupController : MonoBehaviour
         int randomPoint = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPosition = spawnPositions[randomPoint];//selects a random spawn position from the list
         Quaternion spawnRotation = spawnRotations[randomPoint];
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerCharacter"), spawnPosition, spawnRotation);
+        GameObject playerObject = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerCharacter"), spawnPosition, spawnRotation);
+        GameObject scoreObject = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScoreRow"), spawnPosition, spawnRotation);
+        PlayerCharacter player = playerObject.GetComponent<PlayerCharacter>();//gets the playercharacter script
+        ScoreRow scoreRow = scoreObject.GetComponent<ScoreRow>();//gets the scoreboard script
+        player.SetScoreTarget(scoreRow);//Passes the scoreRow to the player
     }
 }

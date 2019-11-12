@@ -75,12 +75,14 @@
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BulletMovement.cs" />
+    <Compile Include="Assets\Scripts\DelayStartWaitingRoom.cs" />
     <Compile Include="Assets\Scripts\GameSetupController.cs" />
     <Compile Include="Assets\Scripts\HUDScript.cs" />
+    <Compile Include="Assets\Scripts\LobbyController.cs" />
     <Compile Include="Assets\Scripts\NetworkController.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
-    <Compile Include="Assets\Scripts\QuickStartLobby.cs" />
-    <Compile Include="Assets\Scripts\QuickStartRoom.cs" />
+    <Compile Include="Assets\Scripts\RoomController.cs" />
+    <Compile Include="Assets\Scripts\ScoreRow.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Scripts\SpawnPoint.cs" />
     <None Include="Assets\Audio\LoopAndMusicFree\_readme\readme_en_ver1.4.txt" />
