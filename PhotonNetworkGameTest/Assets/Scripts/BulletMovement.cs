@@ -9,6 +9,7 @@ public class BulletMovement : MonoBehaviour
     public float bulletDamage = 25;
     public PlayerCharacter Owner;
     public GameObject ExplosionFX;
+    public bool CollideWithEnvironment = true;
 
     private PlayerCharacter hitPlayer;
     private Rigidbody2D rigidBody;
@@ -35,7 +36,7 @@ public class BulletMovement : MonoBehaviour
         }
          else
          {
-            BlowUp();//blows up bullet
+            Destroy(gameObject);//Destroys the bullet without exploding.
         }
     }
 
@@ -46,7 +47,7 @@ public class BulletMovement : MonoBehaviour
             hitPlayer = collision.gameObject.GetComponent<PlayerCharacter>();
             if(hitPlayer != Owner)//if its not the owner of the bullet
             {
-                if (hitPlayer.GetControllable())
+                if (hitPlayer.GetHealth() > 0)
                 {
                     Owner.IncDamageDealt(bulletDamage);
                     hitPlayer.LowerHealth(Owner, bulletDamage);//lowers player health
@@ -54,7 +55,7 @@ public class BulletMovement : MonoBehaviour
                 }
             }
         }
-        else if (collision.tag == "Environment")//Destroys itself and spawns explosion and deals damage
+        else if (collision.tag == "Environment" && CollideWithEnvironment == true)//Destroys itself and spawns explosion and deals damage
         {
             BlowUp();
         }

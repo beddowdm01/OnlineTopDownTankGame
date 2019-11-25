@@ -12,6 +12,8 @@ public class Sound
     public AudioSource source;
 
     public bool loop;//whether to loop
+    public enum Type {Music, Effects};
+    public Type SoundType;
 
     [Range(0f, 1f)]
     public float volume = 1;//volume max and min

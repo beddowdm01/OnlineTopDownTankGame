@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Photon.Pun;
-using System.IO;
 using Photon.Pun.Demo.PunBasics;
-using Photon.Pun.UtilityScripts;
 
 public class PlayerCharacter : MonoBehaviour, IPunObservable
 {
@@ -14,6 +12,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     public GameObject MouseTarget;
     public float bulletSpawnDistance = 0.0f;//how far away the bullet spawns from player centre#
     public float ReloadTime = 1f;//Time it takes to reload
+    public GameObject ExplosionFX;
 
     private PhotonView photonView;
     private SpriteRenderer[] sprites;
@@ -30,6 +29,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     private int kills;
     private int deaths;
     private float damageDealt;
+    private GameMode currentGameMode;
 
 
 
@@ -50,6 +50,12 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         {
             rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
             sprites = this.gameObject.GetComponentsInChildren<SpriteRenderer>();//gets all the player sprites
+            currentGameMode = FindObjectOfType<GameMode>();
+            if(currentGameMode)
+            {
+                currentGameMode.AddPlayer(this);
+            }
+
             audioManager = FindObjectOfType<AudioManager>();
             foreach (SpriteRenderer sprite in sprites)
             {
@@ -59,14 +65,12 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
                 }
             }
         }
-
         cameraWork = this.gameObject.GetComponent<CameraWork>();
         if (cameraWork != null)
         {
             if (photonView.IsMine)
             {
-                cameraWork.OnStartFollowing();
-            
+                cameraWork.OnStartFollowing();       
             }
         }
         else
@@ -119,9 +123,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
                 audioManager.ChangeVolume("MoveEngine", 0.15f);
                 audioManager.ChangeVolume("BoostEngine", 0.0f);
             }
-        }
-
-        
+        }     
         transform.Rotate(0, 0, -turnAxis);//rotates the tank
     }
 
@@ -153,8 +155,12 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
 
     private void KillPlayer()
     {
-        photonView.RPC("KillPlayerSettings", RpcTarget.All, photonView.ViewID);//sends a message to all players to die
-        transform.localScale = new Vector3(0f, 0f, 0f);//sets scale to 0
+        if (photonView.IsMine)
+        {
+            photonView.RPC("KillPlayerSettings", RpcTarget.All, photonView.ViewID);//sends a message to all players to die
+            Instantiate(ExplosionFX, transform.position, transform.rotation);
+            transform.localScale = new Vector3(0f, 0f, 0f);//sets scale to 0
+        }
     }
 
     private void Respawn()
@@ -194,6 +200,12 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         return controllable;
     }
 
+    public void SetControllable(bool canControl)
+    {
+        controllable = canControl;
+    }
+
+
     public float GetHealth()
     {
         return PlayerHealth;
@@ -209,32 +221,52 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
         return damageDealt;
     }
     
-    public float GetKills()
+    public int GetKills()
     {
         return kills;
     }
     
-    public float GetDeaths()
+    public int GetDeaths()
     {
         return deaths;
     }
+
+    public string GetName()
+    {
+        return PhotonNetwork.NickName;
+    }
+
     public void IncDamageDealt(float damage)
     {
         damageDealt += damage;
         playerScore.UpdateScore();
+        if (currentGameMode && photonView.IsMine)
+        {
+            currentGameMode.UpdateGameModeScore();
+        }
     }
 
     public void IncKills()
     {
         kills++;
         playerScore.UpdateScore();
+        if (currentGameMode && photonView.IsMine)
+        {
+            currentGameMode.UpdateGameModeScore();
+        }
     }
 
     public void IncDeaths()
     {
         deaths++;
         playerScore.UpdateScore();
+        if (currentGameMode && photonView.IsMine)
+        {
+            currentGameMode.UpdateGameModeScore();
+        }
     }
+
+
 
     [PunRPC]
     private void Shoot(Vector3 bulletSpawnPos, Quaternion gunRotation, PhotonMessageInfo info)
@@ -255,14 +287,21 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     [PunRPC]
     private void KillPlayerSettings(int sender, PhotonMessageInfo info)
     {
-        controllable = false;//stops controlling
+        if (sender == photonView.ViewID)
+        {
+            controllable = false;//stops controlling
+        }
     }
 
     [PunRPC]
     private void RespawnPlayerSettings(int sender, PhotonMessageInfo info)
     {
-        PlayerHealth = 100;//Resets the player health
-        controllable = true;//allows it to be controlled
+        if (sender == photonView.ViewID)
+        {
+            PlayerHealth = 100;//Resets the player health
+            PlayerBoost = 100;//Resets the player boost
+            controllable = true;//allows it to be controlled
+        }
     }
 
 

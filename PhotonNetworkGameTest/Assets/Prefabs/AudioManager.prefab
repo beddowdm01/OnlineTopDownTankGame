@@ -48,13 +48,15 @@ MonoBehaviour:
     name: Music
     source: {fileID: 0}
     loop: 1
-    volume: 0
+    SoundType: 0
+    volume: 0.5
     spatialblend: 0.5
     pitch: 1
   - clip: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
     name: TankShot
     source: {fileID: 0}
     loop: 0
+    SoundType: 1
     volume: 0.5
     spatialblend: 0.5
     pitch: 1
@@ -62,6 +64,7 @@ MonoBehaviour:
     name: MissileExplosion
     source: {fileID: 0}
     loop: 0
+    SoundType: 1
     volume: 0.5
     spatialblend: 0.5
     pitch: 1
@@ -69,6 +72,7 @@ MonoBehaviour:
     name: BoostEngine
     source: {fileID: 0}
     loop: 1
+    SoundType: 1
     volume: 0
     spatialblend: 0.5
     pitch: 1
@@ -76,6 +80,7 @@ MonoBehaviour:
     name: MoveEngine
     source: {fileID: 0}
     loop: 1
+    SoundType: 1
     volume: 0
     spatialblend: 0.5
     pitch: 1

@@ -17,7 +17,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings(); // connects to the photon master servers
-
     }
 
     public override void OnConnectedToMaster()

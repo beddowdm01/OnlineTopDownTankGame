@@ -3,25 +3,24 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class DelayStartWaitingRoom : MonoBehaviourPunCallbacks
 {
-    private PhotonView photonView;
-
+    [SerializeField]
+    private int minPlayersToStart = 2;
     [SerializeField]
     private int multiplayerSceneIndex = 1;
     [SerializeField]
-    private int menuSceneIndex = 2;
+    private int mainMenuIndex = 0;
 
     private int playerCount;
     private int roomSize = 4;
-    [SerializeField]
-    private int minPlayersToStart = 2;
 
     [SerializeField]
-    private Text playerCountDisplay;
+    private Text playerCountDisplay = null;
     [SerializeField]
-    private Text timerToStartDisplay;
+    private Text timerToStartDisplay = null;
 
     private bool readyToCountDown;
     private bool readyToStart;
@@ -38,7 +37,6 @@ public class DelayStartWaitingRoom : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        photonView = GetComponent<PhotonView>();
         fullGameTimer = maxFullGameWaitTime;
         notFullGameTimer = maxWaitTime;
         timerToStartGame = maxWaitTime;
@@ -75,6 +73,7 @@ public class DelayStartWaitingRoom : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.IsMasterClient)
         {
+            PhotonView photonView = GetComponent<PhotonView>();
             photonView.RPC("RPCSendTimer", RpcTarget.Others, timerToStartGame);
         }
     }
@@ -150,8 +149,14 @@ public class DelayStartWaitingRoom : MonoBehaviourPunCallbacks
 
     public void DelayCancel()
     {
-        //public function for the cancel button to go back to the menu
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene(menuSceneIndex);
+        StartCoroutine(DoSwitchLevel(mainMenuIndex));
+    }
+
+    IEnumerator DoSwitchLevel(int level)
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene(level);
     }
 }

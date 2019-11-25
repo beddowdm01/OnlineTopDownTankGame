@@ -172,12 +172,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   BoostSpeed: 3
-  BulletPrefab: {fileID: 2379806502294823900, guid: 72f0c5262d3e72b4eb1b9c33e83d7f6a,
+  BulletPrefab: {fileID: 2379806502294823900, guid: 94b48fc4d037cc549aff2f09a4a94c49,
     type: 3}
   MouseTarget: {fileID: 1084237077904298, guid: 2338ca1beaeb54964b1c21a27138ae8c,
     type: 3}
   bulletSpawnDistance: 0
   ReloadTime: 1
+  ExplosionFX: {fileID: 2649131887949806868, guid: 8c207cc73df40fe458cc85912159a17d,
+    type: 3}
 --- !u!114 &8807350468140832144
 MonoBehaviour:
   m_ObjectHideFlags: 0

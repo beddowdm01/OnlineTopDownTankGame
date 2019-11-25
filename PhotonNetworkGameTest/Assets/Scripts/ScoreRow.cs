@@ -59,13 +59,10 @@ public class ScoreRow : MonoBehaviour, IPunObservable
         hud.DeactivateScoreBoard();//Deactivates the scoreboard
     }
 
-    void start()
-    {
-    }
-
     public void SetTargetPlayer(int PlayerID)
     {
         photonView.RPC("SetPlayer", RpcTarget.AllBufferedViaServer, PlayerID);//sends a message to set all the players scoreboards
+        SetName();
     }
 
     [PunRPC]
@@ -74,10 +71,17 @@ public class ScoreRow : MonoBehaviour, IPunObservable
         player = (PhotonView.Find(PlayerID).gameObject).GetComponent<PlayerCharacter>();
     }
 
+    public void SetName()
+    {
+        if (photonView.IsMine)
+        {
+            playerName.text = PhotonNetwork.NickName;
+        }
+    }
+
     // Update is called once per frame
     public void UpdateScore()
     {
-        playerName.text = "Barry";
         playerKills.text = ((int)player.GetKills()).ToString();
         playerDeaths.text = ((int)player.GetDeaths()).ToString();
         damageDealt.text = ((int)player.GetDamage()).ToString();
@@ -87,12 +91,14 @@ public class ScoreRow : MonoBehaviour, IPunObservable
     {
         if (stream.IsWriting)//syncs all the score data to one and other.
         {
+            stream.SendNext(playerName.text);
             stream.SendNext(playerKills.text);
             stream.SendNext(playerDeaths.text);
             stream.SendNext(damageDealt.text);
         }
         else
         {
+            playerName.text = (string)stream.ReceiveNext();
             playerKills.text = (string)stream.ReceiveNext();
             playerDeaths.text = (string)stream.ReceiveNext();
             damageDealt.text = (string)stream.ReceiveNext();

@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds; //creates an array of Sounds
 
     public static AudioManager instance;
+    private float masterVolume;
 
     // Start is called before the first frame update
     void Awake()
@@ -67,5 +68,23 @@ public class AudioManager : MonoBehaviour
         s.source.volume = newVolume;
     }
 
+    public void ChangeAudioVolume(float newVolume, Sound.Type soundType)
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.SoundType == soundType)
+            {
+                s.source.volume = newVolume;
+            }
+        }
+    }
 
+    public void ChangeMasterVolume(float newVolume)
+    {
+        masterVolume = newVolume;
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = s.source.volume*newVolume;
+        }
+    }
 }

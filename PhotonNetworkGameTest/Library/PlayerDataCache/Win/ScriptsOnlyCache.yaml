@@ -3,15 +3,19 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioManager
     - BulletMovement
-    - DelayStartLobby
-    - DelayStartRoom
     - DelayStartWaitingRoom
     - GameSetupController
     - HUDScript
+    - LobbyController
     - NetworkController
+    - PauseMenu
     - PlayerCharacter
+    - PointsGameMode
+    - RoomButton
+    - RoomController
     - ScoreRow
     - SpawnPoint
+    - TDMGameMode
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
@@ -22,6 +26,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -31,7 +37,6 @@ ScriptsOnlyBuild:
     - Photon.Pun.ServerSettings
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -48,11 +53,18 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.Dropdown
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/DelayStartWaitingRoom.unity:
     - Class: 1
@@ -74,21 +86,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11326}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11372}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11810}
     - Class: 114
-      Script: {instanceID: 12340}
+      Script: {instanceID: 11866}
     - Class: 114
-      Script: {instanceID: 12918}
+      Script: {instanceID: 12346}
     - Class: 114
-      Script: {instanceID: 13288}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13370}
+      Script: {instanceID: 13298}
     - Class: 114
-      Script: {instanceID: 20610}
+      Script: {instanceID: 13380}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -149,65 +161,75 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11268}
+      Script: {instanceID: 11270}
     - Class: 114
-      Script: {instanceID: 11288}
+      Script: {instanceID: 11290}
     - Class: 114
-      Script: {instanceID: 11326}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11372}
     - Class: 114
-      Script: {instanceID: 11772}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 11852}
+      Script: {instanceID: 11774}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11856}
     - Class: 114
-      Script: {instanceID: 11930}
+      Script: {instanceID: 11866}
     - Class: 114
-      Script: {instanceID: 12044}
+      Script: {instanceID: 11934}
     - Class: 114
-      Script: {instanceID: 12112}
+      Script: {instanceID: 12046}
     - Class: 114
-      Script: {instanceID: 12126}
+      Script: {instanceID: 12084}
     - Class: 114
-      Script: {instanceID: 12144}
+      Script: {instanceID: 12114}
     - Class: 114
-      Script: {instanceID: 12214}
+      Script: {instanceID: 12128}
     - Class: 114
-      Script: {instanceID: 12340}
+      Script: {instanceID: 12146}
     - Class: 114
-      Script: {instanceID: 12394}
+      Script: {instanceID: 12218}
     - Class: 114
-      Script: {instanceID: 12472}
+      Script: {instanceID: 12288}
     - Class: 114
-      Script: {instanceID: 12556}
+      Script: {instanceID: 12346}
     - Class: 114
-      Script: {instanceID: 12564}
+      Script: {instanceID: 12400}
     - Class: 114
-      Script: {instanceID: 12770}
+      Script: {instanceID: 12466}
+    - Class: 114
+      Script: {instanceID: 12478}
+    - Class: 114
+      Script: {instanceID: 12562}
+    - Class: 114
+      Script: {instanceID: 12570}
+    - Class: 114
+      Script: {instanceID: 12582}
+    - Class: 114
+      Script: {instanceID: 12708}
     - Class: 114
       Script: {instanceID: 12778}
     - Class: 114
-      Script: {instanceID: 12784}
+      Script: {instanceID: 12786}
     - Class: 114
-      Script: {instanceID: 12918}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 13024}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13160}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13288}
+      Script: {instanceID: 13074}
     - Class: 114
-      Script: {instanceID: 13370}
+      Script: {instanceID: 13170}
     - Class: 114
-      Script: {instanceID: 13402}
+      Script: {instanceID: 13298}
     - Class: 114
-      Script: {instanceID: 13410}
+      Script: {instanceID: 13380}
     - Class: 114
-      Script: {instanceID: 19724}
+      Script: {instanceID: 13412}
     - Class: 114
-      Script: {instanceID: 19732}
+      Script: {instanceID: 13420}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -264,21 +286,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11326}
+      Script: {instanceID: 11228}
     - Class: 114
-      Script: {instanceID: 11370}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11572}
+      Script: {instanceID: 11330}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11372}
     - Class: 114
-      Script: {instanceID: 12078}
+      Script: {instanceID: 11574}
     - Class: 114
-      Script: {instanceID: 12098}
+      Script: {instanceID: 11740}
     - Class: 114
-      Script: {instanceID: 12918}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 13370}
+      Script: {instanceID: 11866}
+    - Class: 114
+      Script: {instanceID: 12080}
+    - Class: 114
+      Script: {instanceID: 12084}
+    - Class: 114
+      Script: {instanceID: 12100}
+    - Class: 114
+      Script: {instanceID: 12346}
+    - Class: 114
+      Script: {instanceID: 12926}
+    - Class: 114
+      Script: {instanceID: 13298}
+    - Class: 114
+      Script: {instanceID: 13364}
+    - Class: 114
+      Script: {instanceID: 13380}
+    - Class: 114
+      Script: {instanceID: 13396}
+    - Class: 114
+      Script: {instanceID: 13420}
+    - Class: 114
+      Script: {instanceID: 61824}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -394,6 +438,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChatGui
+  - hash:
+      serializedVersion: 2
+      Hash: 3137edae12900ea40fae92ad752ac4a5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TDMGameMode
   - hash:
       serializedVersion: 2
       Hash: 74c875e0f15c48e0a55f06093aa93e15
@@ -708,6 +758,12 @@ ScriptsOnlyBuild:
     className: OnClickRpc
   - hash:
       serializedVersion: 2
+      Hash: 8fec1882b2858c6d9422ed9b8b570f2e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DelayStartWaitingRoom
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -732,6 +788,12 @@ ScriptsOnlyBuild:
     className: NetworkController
   - hash:
       serializedVersion: 2
+      Hash: 400c44cc5bbf39f374592f3a44074c2b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
+  - hash:
+      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -742,12 +804,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ControlPlayableAsset
-  - hash:
-      serializedVersion: 2
-      Hash: d8850f5f402998509fa18b0c49f038f8
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: QuickStartLobby
   - hash:
       serializedVersion: 2
       Hash: 117e94af12d2e42e9e17b73f2602978e
@@ -792,12 +848,6 @@ ScriptsOnlyBuild:
     className: PlayerControl
   - hash:
       serializedVersion: 2
-      Hash: 2cc75e7496f5de8be4d52b3f024467c8
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: QuickStartRoom
-  - hash:
-      serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -822,7 +872,7 @@ ScriptsOnlyBuild:
     className: CurrentRoomIsOpenToggle
   - hash:
       serializedVersion: 2
-      Hash: 188194e7c7427117511b9116a47662ca
+      Hash: 03369f294ede2c2e787da5a083e57bf8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BulletMovement
@@ -882,7 +932,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: fa7f55887d665bc170ce7b61e2734a7f
+      Hash: c295043cfa89e98caf9a3b2fa2407600
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -934,6 +984,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonRealtime.dll
     namespaceName: Photon.Realtime
     className: ConnectionHandler
+  - hash:
+      serializedVersion: 2
+      Hash: c6243c82bcba83beb6f455fa6f955af4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameMode
   - hash:
       serializedVersion: 2
       Hash: 19c703fb20b3231dbd1a21248e8bb11b
@@ -1000,6 +1056,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: OnClickDestroy
+  - hash:
+      serializedVersion: 2
+      Hash: f21e479b7cd272489a4f7fdb83042026
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomButton
   - hash:
       serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
@@ -1206,6 +1268,12 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
+      Hash: fa76982955540717eae1b77d87a51eeb
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LobbyController
+  - hash:
+      serializedVersion: 2
       Hash: e4316571779021b969790af4a77452dd
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Asteroids
@@ -1368,6 +1436,12 @@ ScriptsOnlyBuild:
     className: OnStartDelete
   - hash:
       serializedVersion: 2
+      Hash: b636597a8c694c9f84f81d9c881988a8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomController
+  - hash:
+      serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -1398,7 +1472,7 @@ ScriptsOnlyBuild:
     className: OnEscapeQuit
   - hash:
       serializedVersion: 2
-      Hash: e0dfa8c841e16e8b6f6694b9e247e721
+      Hash: 71aace84ed25c983502d511d7900e7ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCharacter
@@ -1644,22 +1718,10 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 5099875986eb084fb31755404ffa277b
+      Hash: 478dab5691c4eb699ffb2ee2b0a077da
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: DelayStartLobby
-  - hash:
-      serializedVersion: 2
-      Hash: fb116fea31008c73f5a08f768526c87e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DelayStartRoom
-  - hash:
-      serializedVersion: 2
-      Hash: dc047ccf8e6284b99f09c1a9e77b5bff
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DelayStartWaitingRoom
+    className: PointsGameMode
   platform: 5
   scenePathNames:
   - Assets/Scenes/MainMenuScene.unity
