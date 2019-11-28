@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69173756698599f4d91f500b243cf159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 9
+  MovementSpeed: 7
   LifeSpan: 3
-  bulletDamage: 20
+  bulletDamage: 15
   Owner: {fileID: 0}
   ExplosionFX: {fileID: 2649131887949806868, guid: 6b71bf6ca1ace0c44ad9f4f52907e53c,
     type: 3}

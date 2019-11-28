@@ -34,14 +34,20 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private Transform roomsContainer = null;
     [SerializeField]
     private GameObject roomListingPrefab = null;
+    [SerializeField]
+    private CurrentGameMode currentGameMode = null;
 
     [SerializeField]
     private int roomSize = 4;
     private string roomName;
     private List<RoomInfo> roomListings;
 
+
+
+
     private enum gameMode {none, quick, delay, priv};
     gameMode selectedGameMode;
+
 
     public void DelayStart()
     {
@@ -49,7 +55,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         delayCancelButton.SetActive(true);
         selectedGameMode = gameMode.delay;
         PhotonNetwork.JoinRandomRoom();
-        Debug.Log("Started");
+        currentGameMode = FindObjectOfType<CurrentGameMode>();
 
     }
 
@@ -86,6 +92,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
         selectedGameMode = gameMode.quick;
         PhotonNetwork.JoinRandomRoom();
         Debug.Log("Started");
+
     }
 
     public void PrivateCancel()

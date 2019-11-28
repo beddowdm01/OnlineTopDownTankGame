@@ -3,19 +3,19 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioManager
     - BulletMovement
+    - CurrentGameMode
     - DelayStartWaitingRoom
+    - GameMode
     - GameSetupController
     - HUDScript
     - LobbyController
     - NetworkController
     - PauseMenu
     - PlayerCharacter
-    - PointsGameMode
     - RoomButton
     - RoomController
     - ScoreRow
     - SpawnPoint
-    - TDMGameMode
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
@@ -27,6 +27,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PhotonTransformViewClassicEditor
+    - Photon.Pun.PhotonViewInspector
     - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
@@ -86,9 +88,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11328}
+      Script: {instanceID: 11326}
     - Class: 114
-      Script: {instanceID: 11372}
+      Script: {instanceID: 11370}
     - Class: 114
       Script: {instanceID: 11810}
     - Class: 114
@@ -161,13 +163,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11270}
+      Script: {instanceID: 11268}
     - Class: 114
-      Script: {instanceID: 11290}
+      Script: {instanceID: 11288}
+    - Class: 114
+      Script: {instanceID: 11326}
     - Class: 114
       Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11372}
+      Script: {instanceID: 11370}
+    - Class: 114
+      Script: {instanceID: 11392}
     - Class: 114
       Script: {instanceID: 11740}
     - Class: 114
@@ -225,7 +231,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13298}
     - Class: 114
+      Script: {instanceID: 13364}
+    - Class: 114
       Script: {instanceID: 13380}
+    - Class: 114
+      Script: {instanceID: 13396}
     - Class: 114
       Script: {instanceID: 13412}
     - Class: 114
@@ -286,13 +296,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11114}
     - Class: 114
-      Script: {instanceID: 11228}
+      Script: {instanceID: 11326}
     - Class: 114
       Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11330}
-    - Class: 114
-      Script: {instanceID: 11372}
+      Script: {instanceID: 11370}
     - Class: 114
       Script: {instanceID: 11574}
     - Class: 114
@@ -308,6 +316,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12100}
     - Class: 114
+      Script: {instanceID: 12174}
+    - Class: 114
       Script: {instanceID: 12346}
     - Class: 114
       Script: {instanceID: 12926}
@@ -321,8 +331,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13396}
     - Class: 114
       Script: {instanceID: 13420}
-    - Class: 114
-      Script: {instanceID: 61824}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -440,12 +448,6 @@ ScriptsOnlyBuild:
     className: ChatGui
   - hash:
       serializedVersion: 2
-      Hash: 3137edae12900ea40fae92ad752ac4a5
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TDMGameMode
-  - hash:
-      serializedVersion: 2
       Hash: 74c875e0f15c48e0a55f06093aa93e15
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -554,6 +556,12 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
+      Hash: b1b8bc90553241e20fc154e0b42dda4a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CurrentGameMode
+  - hash:
+      serializedVersion: 2
       Hash: 234235b9fb07320d11497e08a726cc56
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -656,7 +664,7 @@ ScriptsOnlyBuild:
     className: PhotonHandler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: d6dbfcf65d6ca7976c55aecff8c0639f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HUDScript
@@ -986,7 +994,7 @@ ScriptsOnlyBuild:
     className: ConnectionHandler
   - hash:
       serializedVersion: 2
-      Hash: c6243c82bcba83beb6f455fa6f955af4
+      Hash: 9c939a05a18372f6b3162f9b3eb05d8e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameMode
@@ -1268,7 +1276,7 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
-      Hash: fa76982955540717eae1b77d87a51eeb
+      Hash: 2e025df9f8ccb4db7598aa4158b9427b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LobbyController
@@ -1436,7 +1444,7 @@ ScriptsOnlyBuild:
     className: OnStartDelete
   - hash:
       serializedVersion: 2
-      Hash: b636597a8c694c9f84f81d9c881988a8
+      Hash: 949d18729241905c7ee6eb76de39dd8b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RoomController
@@ -1472,7 +1480,7 @@ ScriptsOnlyBuild:
     className: OnEscapeQuit
   - hash:
       serializedVersion: 2
-      Hash: 71aace84ed25c983502d511d7900e7ba
+      Hash: 503a8c2875cba28455d3dbfbed62deb2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerCharacter
@@ -1716,12 +1724,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 478dab5691c4eb699ffb2ee2b0a077da
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PointsGameMode
   platform: 5
   scenePathNames:
   - Assets/Scenes/MainMenuScene.unity

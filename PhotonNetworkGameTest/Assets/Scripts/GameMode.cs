@@ -13,16 +13,40 @@ public class GameMode : MonoBehaviour
     private Text winnerName = null;
     [SerializeField]
     private int mainMenuIndex = 0;
+    [SerializeField]
+    private int killsToWin = 10;
+    [SerializeField]
+    private int damageToWin = 500;
+    [SerializeField]
+    private enum gameModes {DM, Points};
+    [SerializeField]
+    gameModes chosenGameMode = gameModes.DM;
+
+    private CurrentGameMode currentGameMode;
 
     protected PhotonView photonView;
 
-    void Start()
+    private void Awake()
     {
+
         photonView = GetComponent<PhotonView>();
         PlayerCharacter[] playersToAdd = FindObjectsOfType<PlayerCharacter>();
-        foreach(PlayerCharacter player in playersToAdd)
+        foreach (PlayerCharacter player in playersToAdd)
         {
             players.Add(player);
+        }
+        currentGameMode = FindObjectOfType<CurrentGameMode>();
+    }
+
+    void Start()
+    {
+        if(currentGameMode)
+        {
+            chosenGameMode = (gameModes)currentGameMode.GetGameMode();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                photonView.RPC("UpdateGameMode", RpcTarget.All, chosenGameMode);
+            }
         }
     }
 
@@ -33,7 +57,17 @@ public class GameMode : MonoBehaviour
 
     public virtual void UpdateGameModeScore()
     {
-
+        foreach (PlayerCharacter player in players)
+        {
+            if (chosenGameMode == gameModes.DM && player.GetKills() >= killsToWin)
+            {
+                photonView.RPC("EndGame", RpcTarget.All, player.GetName());
+            }
+            else if (chosenGameMode == gameModes.Points && player.GetDamage() >= damageToWin)
+            {
+                photonView.RPC("EndGame", RpcTarget.All, player.GetName());
+            }
+        }
     }
 
     public void Quit()
@@ -60,5 +94,12 @@ public class GameMode : MonoBehaviour
         Cursor.visible = true;
         winnerName.text = playerName;
         GameOverPanel.SetActive(true);
+    }
+
+    [PunRPC]
+    private void UpdateGameMode(gameModes gameMode)
+    {
+        chosenGameMode = gameMode;
+        currentGameMode.OnGameModeChanged((int)gameMode);
     }
 }

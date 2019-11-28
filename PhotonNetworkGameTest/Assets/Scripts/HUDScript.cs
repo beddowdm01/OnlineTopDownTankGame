@@ -6,32 +6,29 @@ using UnityEngine.UI;
 public class HUDScript : MonoBehaviour
 {
     private Text[] HUDTexts;
-    private Text health;
-    private Text boost;
+
+    [SerializeField]
+    private Text health = null;
+    [SerializeField]
+    private Text boost = null;
+    [SerializeField]
+    private Text currentGameModeText = null;
+
     private GameObject scoreBoard;
     private PlayerCharacter player;
+    private CurrentGameMode currentGameMode;
 
     private void Awake()
     {
-
         scoreBoard = GameObject.Find("ScoreBoard");//gets the scoreboard
+        currentGameMode = FindObjectOfType<CurrentGameMode>();
     }
 
     private void Start()
     {
         HUDTexts = GetComponentsInChildren<Text>();//Gets all the text objects in the game object
         player = FindObjectOfType<PlayerCharacter>();//gets the player characters
-        foreach (Text text in HUDTexts)
-        {
-            if(text.name == "Health")
-            {
-                health = text;
-            }
-            else if(text.name == "Boost")
-            {
-                boost = text;
-            }
-        }
+
     }
 
     public void ActivateScoreBoard()
@@ -49,6 +46,7 @@ public class HUDScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Tab))
         {
+            currentGameModeText.text = currentGameMode.GetGameModeName();//gets the game mode name to display in the UI
             ActivateScoreBoard();//Activates the scoreboard when tab is pressed
         }
         else

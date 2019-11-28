@@ -9,6 +9,7 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     public float Speed = 1;//speed multiplier
     public float BoostSpeed = 3;
     public GameObject BulletPrefab;
+    public GameObject SpecialBulletPrefab;
     public GameObject MouseTarget;
     public float bulletSpawnDistance = 0.0f;//how far away the bullet spawns from player centre#
     public float ReloadTime = 1f;//Time it takes to reload
@@ -30,6 +31,9 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
     private int deaths;
     private float damageDealt;
     private GameMode currentGameMode;
+
+    private enum bulletPrefabs { baseBullet, specialBullet };
+    private bulletPrefabs currentBullet = bulletPrefabs.baseBullet;
 
 
 
@@ -92,13 +96,27 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
             RotateGun();//Rotates the gun
             MoveCursor();//Moves the target cursor
             MoveTank();//Moves and rotates the tank
+            ChangeGun();
+
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && ReloadTime < 0)//Shoots a bullet
             {
                 ReloadTime = 1;//reset timer
-                photonView.RPC("Shoot", RpcTarget.All, bulletSpawnPos, gun.transform.rotation);//sends a message to all players to shoot
+                photonView.RPC("Shoot", RpcTarget.All, bulletSpawnPos, gun.transform.rotation, currentBullet);//sends a message to all players to shoot
             }
             ReloadTime -= Time.unscaledDeltaTime;//Reload cooldown
+        }
+    }
+
+    private void ChangeGun()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentBullet = bulletPrefabs.baseBullet;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentBullet = bulletPrefabs.specialBullet;
         }
     }
 
@@ -269,13 +287,32 @@ public class PlayerCharacter : MonoBehaviour, IPunObservable
 
 
     [PunRPC]
-    private void Shoot(Vector3 bulletSpawnPos, Quaternion gunRotation, PhotonMessageInfo info)
+    private void Shoot(Vector3 bulletSpawnPos, Quaternion gunRotation, bulletPrefabs firedBullet, PhotonMessageInfo info)
     {
-        GameObject bullet;//The bullet that will be created
-        float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
-        FindObjectOfType<AudioManager>().Play("TankShot");
-        bullet = Instantiate(BulletPrefab, bulletSpawnPos, gunRotation) as GameObject;
-        bullet.GetComponent<BulletMovement>().InitialiseBullet(this, Mathf.Abs(lag));
+        if(firedBullet == bulletPrefabs.baseBullet)
+        {
+            GameObject bullet;//The bullet that will be created
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+            FindObjectOfType<AudioManager>().Play("TankShot");
+            bullet = Instantiate(BulletPrefab, bulletSpawnPos, gunRotation) as GameObject;
+            bullet.GetComponent<BulletMovement>().InitialiseBullet(this, Mathf.Abs(lag));
+        }
+        else if (firedBullet == bulletPrefabs.specialBullet)
+        {
+            GameObject bullet;//The bullet that will be created
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+            FindObjectOfType<AudioManager>().Play("TankShot");
+            bullet = Instantiate(SpecialBulletPrefab, bulletSpawnPos, gunRotation) as GameObject;
+            bullet.GetComponent<BulletMovement>().InitialiseBullet(this, Mathf.Abs(lag));
+        }
+        else
+        {
+            GameObject bullet;//The bullet that will be created
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+            FindObjectOfType<AudioManager>().Play("TankShot");
+            bullet = Instantiate(BulletPrefab, bulletSpawnPos, gunRotation) as GameObject;
+            bullet.GetComponent<BulletMovement>().InitialiseBullet(this, Mathf.Abs(lag));
+        }
     }
 
     [PunRPC]

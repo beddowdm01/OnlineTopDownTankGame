@@ -13,7 +13,7 @@ public class RoomController : MonoBehaviourPunCallbacks
     public GameObject roomPanel = null;
 
     [SerializeField]
-    private GameObject startButton = null;
+    private GameObject masterClientObjects = null;
 
     [SerializeField]
     private Transform playersContainer = null;
@@ -28,6 +28,24 @@ public class RoomController : MonoBehaviourPunCallbacks
     private int waitingRoomSceneIndex = 0;
     [SerializeField]
     private int gameRoomSceneIndex = 0;
+
+    [SerializeField]
+    private int gameRoomsSceneStartIndex = 0;
+
+    [SerializeField]
+    private Dropdown mapDropDown = null;
+
+    private void Start()
+    {
+        mapDropDown.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(mapDropDown.value);
+        });
+    }
+
+    void DropdownValueChanged(int change)
+    {
+        gameRoomSceneIndex = gameRoomsSceneStartIndex + change;
+    }
 
     public override void OnEnable()
     {
@@ -55,11 +73,11 @@ public class RoomController : MonoBehaviourPunCallbacks
             roomNameDisplay.text = PhotonNetwork.CurrentRoom.Name;
             if (PhotonNetwork.IsMasterClient)
             {
-                startButton.SetActive(true);
+                masterClientObjects.SetActive(true);
             }
             else
             {
-                startButton.SetActive(false);
+                masterClientObjects.SetActive(false);
             }
             ClearPlayerListings();
             ListPlayers();
@@ -100,7 +118,7 @@ public class RoomController : MonoBehaviourPunCallbacks
         ListPlayers();
         if (PhotonNetwork.IsMasterClient)
         {
-            startButton.SetActive(true);
+            masterClientObjects.SetActive(true);
         }
     }
 
